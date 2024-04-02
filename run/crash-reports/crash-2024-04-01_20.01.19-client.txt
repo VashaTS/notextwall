@@ -1,0 +1,447 @@
+---- Minecraft Crash Report ----
+// Daisy, daisy...
+
+Time: 2024-04-01 20:01:19
+Description: Initializing game
+
+java.lang.RuntimeException: Could not execute entrypoint stage 'main' due to errors, provided by 'fabric-api-lookup-api-v1'!
+	at net.fabricmc.loader.impl.FabricLoaderImpl.lambda$invokeEntrypoints$2(FabricLoaderImpl.java:388)
+	at net.fabricmc.loader.impl.util.ExceptionUtil.gatherExceptions(ExceptionUtil.java:33)
+	at net.fabricmc.loader.impl.FabricLoaderImpl.invokeEntrypoints(FabricLoaderImpl.java:386)
+	at net.fabricmc.loader.impl.game.minecraft.Hooks.startClient(Hooks.java:52)
+	at net.minecraft.client.MinecraftClient.<init>(MinecraftClient.java:542)
+	at net.minecraft.client.main.Main.main(Main.java:203)
+	at net.fabricmc.loader.impl.game.minecraft.MinecraftGameProvider.launch(MinecraftGameProvider.java:470)
+	at net.fabricmc.loader.impl.launch.knot.Knot.launch(Knot.java:74)
+	at net.fabricmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:23)
+	at net.fabricmc.devlaunchinjector.Main.main(Main.java:86)
+	Suppressed: java.lang.BootstrapMethodError: java.lang.RuntimeException: Mixin transformation of net.minecraft.server.MinecraftServer failed
+		at net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents.lambda$static$1(ServerWorldEvents.java:32)
+		at net.fabricmc.fabric.impl.base.event.ArrayBackedEvent.update(ArrayBackedEvent.java:54)
+		at net.fabricmc.fabric.impl.base.event.ArrayBackedEvent.<init>(ArrayBackedEvent.java:50)
+		at net.fabricmc.fabric.impl.base.event.EventFactoryImpl.createArrayBacked(EventFactoryImpl.java:47)
+		at net.fabricmc.fabric.api.event.EventFactory.createArrayBacked(EventFactory.java:44)
+		at net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents.<clinit>(ServerWorldEvents.java:32)
+		at net.fabricmc.fabric.impl.event.lifecycle.LifecycleEventsImpl.onInitialize(LifecycleEventsImpl.java:50)
+		at net.fabricmc.loader.impl.FabricLoaderImpl.invokeEntrypoints(FabricLoaderImpl.java:384)
+		... 7 more
+	Caused by: java.lang.RuntimeException: Mixin transformation of net.minecraft.server.MinecraftServer failed
+		at net.fabricmc.loader.impl.launch.knot.KnotClassDelegate.getPostMixinClassByteArray(KnotClassDelegate.java:427)
+		at net.fabricmc.loader.impl.launch.knot.KnotClassDelegate.tryLoadClass(KnotClassDelegate.java:323)
+		at net.fabricmc.loader.impl.launch.knot.KnotClassDelegate.loadClass(KnotClassDelegate.java:218)
+		at net.fabricmc.loader.impl.launch.knot.KnotClassLoader.loadClass(KnotClassLoader.java:119)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+		... 15 more
+	Caused by: org.spongepowered.asm.mixin.transformer.throwables.MixinTransformerError: An unexpected critical error was encountered
+		at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:392)
+		at org.spongepowered.asm.mixin.transformer.MixinTransformer.transformClass(MixinTransformer.java:234)
+		at org.spongepowered.asm.mixin.transformer.MixinTransformer.transformClassBytes(MixinTransformer.java:202)
+		at net.fabricmc.loader.impl.launch.knot.KnotClassDelegate.getPostMixinClassByteArray(KnotClassDelegate.java:422)
+		... 19 more
+	Caused by: org.spongepowered.asm.mixin.throwables.MixinApplyError: Mixin [notextwall.mixins.json:ExampleMixin from mod notextwall] from phase [DEFAULT] in config [notextwall.mixins.json] FAILED during APPLY
+		at org.spongepowered.asm.mixin.transformer.MixinProcessor.handleMixinError(MixinProcessor.java:638)
+		at org.spongepowered.asm.mixin.transformer.MixinProcessor.handleMixinApplyError(MixinProcessor.java:589)
+		at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:379)
+		... 22 more
+	Caused by: org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException: Critical injection failure: @Inject annotation on onInjectGameMessage could not find any targets matching 'onGameMessage' in net.minecraft.server.MinecraftServer. No refMap loaded. [PREINJECT Applicator Phase -> notextwall.mixins.json:ExampleMixin from mod notextwall -> Prepare Injections ->  -> handler$zig000$notextwall$onInjectGameMessage(Lnet/minecraft/network/message/MessageType;Lnet/minecraft/text/Text;Ljava/util/UUID;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V -> Parse]
+		at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.validateTargets(InjectionInfo.java:656)
+		at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.findTargets(InjectionInfo.java:587)
+		at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.readAnnotation(InjectionInfo.java:330)
+		at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.<init>(InjectionInfo.java:316)
+		at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.<init>(InjectionInfo.java:308)
+		at org.spongepowered.asm.mixin.injection.struct.CallbackInjectionInfo.<init>(CallbackInjectionInfo.java:46)
+		at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+		at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+		at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+		at org.spongepowered.asm.mixin.injection.struct.InjectionInfo$InjectorEntry.create(InjectionInfo.java:149)
+		at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.parse(InjectionInfo.java:708)
+		at org.spongepowered.asm.mixin.transformer.MixinTargetContext.prepareInjections(MixinTargetContext.java:1329)
+		at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.prepareInjections(MixinApplicatorStandard.java:1053)
+		at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.applyMixin(MixinApplicatorStandard.java:395)
+		at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.apply(MixinApplicatorStandard.java:327)
+		at org.spongepowered.asm.mixin.transformer.TargetClassContext.apply(TargetClassContext.java:421)
+		at org.spongepowered.asm.mixin.transformer.TargetClassContext.applyMixins(TargetClassContext.java:403)
+		at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:363)
+		... 22 more
+	Suppressed: java.lang.NoClassDefFoundError: Could not initialize class net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
+		at net.fabricmc.fabric.impl.event.lifecycle.v0.LegacyEventInvokers.onInitialize(LegacyEventInvokers.java:31)
+		at net.fabricmc.loader.impl.FabricLoaderImpl.invokeEntrypoints(FabricLoaderImpl.java:384)
+		... 7 more
+	Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.BootstrapMethodError: java.lang.RuntimeException: Mixin transformation of net.minecraft.server.MinecraftServer failed [in thread "Render thread"]
+		at net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents.lambda$static$1(ServerLifecycleEvents.java:36)
+		at net.fabricmc.fabric.impl.base.event.ArrayBackedEvent.update(ArrayBackedEvent.java:54)
+		at net.fabricmc.fabric.impl.base.event.ArrayBackedEvent.<init>(ArrayBackedEvent.java:50)
+		at net.fabricmc.fabric.impl.base.event.EventFactoryImpl.createArrayBacked(EventFactoryImpl.java:47)
+		at net.fabricmc.fabric.api.event.EventFactory.createArrayBacked(EventFactory.java:44)
+		at net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents.<clinit>(ServerLifecycleEvents.java:36)
+		at net.fabricmc.fabric.impl.lookup.ApiLookupImpl.onInitialize(ApiLookupImpl.java:26)
+		... 8 more
+	Suppressed: java.lang.BootstrapMethodError: java.lang.RuntimeException: Mixin transformation of net.minecraft.server.MinecraftServer failed
+		at net.fabricmc.fabric.api.networking.v1.ServerConfigurationConnectionEvents.lambda$static$1(ServerConfigurationConnectionEvents.java:36)
+		at net.fabricmc.fabric.impl.base.event.ArrayBackedEvent.update(ArrayBackedEvent.java:54)
+		at net.fabricmc.fabric.impl.base.event.ArrayBackedEvent.<init>(ArrayBackedEvent.java:50)
+		at net.fabricmc.fabric.impl.base.event.EventFactoryImpl.createArrayBacked(EventFactoryImpl.java:47)
+		at net.fabricmc.fabric.api.event.EventFactory.createArrayBacked(EventFactory.java:44)
+		at net.fabricmc.fabric.api.networking.v1.ServerConfigurationConnectionEvents.<clinit>(ServerConfigurationConnectionEvents.java:36)
+		at net.fabricmc.fabric.impl.registry.sync.FabricRegistryInit.onInitialize(FabricRegistryInit.java:33)
+		at net.fabricmc.loader.impl.FabricLoaderImpl.invokeEntrypoints(FabricLoaderImpl.java:384)
+		... 7 more
+	Caused by: java.lang.RuntimeException: Mixin transformation of net.minecraft.server.MinecraftServer failed
+		at net.fabricmc.loader.impl.launch.knot.KnotClassDelegate.getPostMixinClassByteArray(KnotClassDelegate.java:427)
+		at net.fabricmc.loader.impl.launch.knot.KnotClassDelegate.tryLoadClass(KnotClassDelegate.java:323)
+		at net.fabricmc.loader.impl.launch.knot.KnotClassDelegate.loadClass(KnotClassDelegate.java:218)
+		at net.fabricmc.loader.impl.launch.knot.KnotClassLoader.loadClass(KnotClassLoader.java:119)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+		... 15 more
+	Caused by: org.spongepowered.asm.mixin.transformer.throwables.MixinTransformerError: An unexpected critical error was encountered
+		at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:392)
+		at org.spongepowered.asm.mixin.transformer.MixinTransformer.transformClass(MixinTransformer.java:234)
+		at org.spongepowered.asm.mixin.transformer.MixinTransformer.transformClassBytes(MixinTransformer.java:202)
+		at net.fabricmc.loader.impl.launch.knot.KnotClassDelegate.getPostMixinClassByteArray(KnotClassDelegate.java:422)
+		... 19 more
+	Caused by: org.spongepowered.asm.mixin.throwables.MixinApplyError: Mixin [notextwall.mixins.json:ExampleMixin from mod notextwall] from phase [DEFAULT] in config [notextwall.mixins.json] FAILED during APPLY
+		at org.spongepowered.asm.mixin.transformer.MixinProcessor.handleMixinError(MixinProcessor.java:638)
+		at org.spongepowered.asm.mixin.transformer.MixinProcessor.handleMixinApplyError(MixinProcessor.java:589)
+		at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:379)
+		... 22 more
+	Caused by: org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException: Critical injection failure: @Inject annotation on onInjectGameMessage could not find any targets matching 'onGameMessage' in net.minecraft.server.MinecraftServer. No refMap loaded. [PREINJECT Applicator Phase -> notextwall.mixins.json:ExampleMixin from mod notextwall -> Prepare Injections ->  -> handler$zig000$notextwall$onInjectGameMessage(Lnet/minecraft/network/message/MessageType;Lnet/minecraft/text/Text;Ljava/util/UUID;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V -> Parse]
+		at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.validateTargets(InjectionInfo.java:656)
+		at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.findTargets(InjectionInfo.java:587)
+		at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.readAnnotation(InjectionInfo.java:330)
+		at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.<init>(InjectionInfo.java:316)
+		at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.<init>(InjectionInfo.java:308)
+		at org.spongepowered.asm.mixin.injection.struct.CallbackInjectionInfo.<init>(CallbackInjectionInfo.java:46)
+		at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+		at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+		at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+		at org.spongepowered.asm.mixin.injection.struct.InjectionInfo$InjectorEntry.create(InjectionInfo.java:149)
+		at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.parse(InjectionInfo.java:708)
+		at org.spongepowered.asm.mixin.transformer.MixinTargetContext.prepareInjections(MixinTargetContext.java:1329)
+		at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.prepareInjections(MixinApplicatorStandard.java:1053)
+		at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.applyMixin(MixinApplicatorStandard.java:395)
+		at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.apply(MixinApplicatorStandard.java:327)
+		at org.spongepowered.asm.mixin.transformer.TargetClassContext.apply(TargetClassContext.java:421)
+		at org.spongepowered.asm.mixin.transformer.TargetClassContext.applyMixins(TargetClassContext.java:403)
+		at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:363)
+		... 22 more
+	Suppressed: java.lang.NoClassDefFoundError: Could not initialize class net.fabricmc.fabric.api.networking.v1.ServerConfigurationConnectionEvents
+		at net.fabricmc.fabric.impl.recipe.ingredient.CustomIngredientSync.onInitialize(CustomIngredientSync.java:88)
+		at net.fabricmc.loader.impl.FabricLoaderImpl.invokeEntrypoints(FabricLoaderImpl.java:384)
+		... 7 more
+	Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.BootstrapMethodError: java.lang.RuntimeException: Mixin transformation of net.minecraft.server.MinecraftServer failed [in thread "Render thread"]
+		at net.fabricmc.fabric.api.networking.v1.ServerConfigurationConnectionEvents.lambda$static$1(ServerConfigurationConnectionEvents.java:36)
+		at net.fabricmc.fabric.impl.base.event.ArrayBackedEvent.update(ArrayBackedEvent.java:54)
+		at net.fabricmc.fabric.impl.base.event.ArrayBackedEvent.<init>(ArrayBackedEvent.java:50)
+		at net.fabricmc.fabric.impl.base.event.EventFactoryImpl.createArrayBacked(EventFactoryImpl.java:47)
+		at net.fabricmc.fabric.api.event.EventFactory.createArrayBacked(EventFactory.java:44)
+		at net.fabricmc.fabric.api.networking.v1.ServerConfigurationConnectionEvents.<clinit>(ServerConfigurationConnectionEvents.java:36)
+		at net.fabricmc.fabric.impl.registry.sync.FabricRegistryInit.onInitialize(FabricRegistryInit.java:33)
+		... 8 more
+	Suppressed: net.fabricmc.loader.api.EntrypointException: Exception while loading entries for entrypoint 'main' provided by 'fabric-networking-api-v1'
+		at net.fabricmc.loader.impl.entrypoint.EntrypointContainerImpl.getEntrypoint(EntrypointContainerImpl.java:56)
+		at net.fabricmc.loader.impl.FabricLoaderImpl.invokeEntrypoints(FabricLoaderImpl.java:384)
+		... 7 more
+	Caused by: java.lang.RuntimeException: Mixin transformation of net.minecraft.server.MinecraftServer failed
+		at net.fabricmc.loader.impl.launch.knot.KnotClassDelegate.getPostMixinClassByteArray(KnotClassDelegate.java:427)
+		at net.fabricmc.loader.impl.launch.knot.KnotClassDelegate.tryLoadClass(KnotClassDelegate.java:323)
+		at net.fabricmc.loader.impl.launch.knot.KnotClassDelegate.loadClass(KnotClassDelegate.java:218)
+		at net.fabricmc.loader.impl.launch.knot.KnotClassLoader.loadClass(KnotClassLoader.java:119)
+		at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+		at java.base/java.lang.Class.getDeclaredMethods0(Native Method)
+		at java.base/java.lang.Class.privateGetDeclaredMethods(Class.java:3578)
+		at java.base/java.lang.Class.getDeclaredMethods(Class.java:2676)
+		at net.fabricmc.loader.impl.util.DefaultLanguageAdapter.create(DefaultLanguageAdapter.java:68)
+		at net.fabricmc.loader.impl.entrypoint.EntrypointStorage$NewEntry.getOrCreate(EntrypointStorage.java:117)
+		at net.fabricmc.loader.impl.entrypoint.EntrypointContainerImpl.getEntrypoint(EntrypointContainerImpl.java:53)
+		... 8 more
+	Caused by: org.spongepowered.asm.mixin.transformer.throwables.MixinTransformerError: An unexpected critical error was encountered
+		at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:392)
+		at org.spongepowered.asm.mixin.transformer.MixinTransformer.transformClass(MixinTransformer.java:234)
+		at org.spongepowered.asm.mixin.transformer.MixinTransformer.transformClassBytes(MixinTransformer.java:202)
+		at net.fabricmc.loader.impl.launch.knot.KnotClassDelegate.getPostMixinClassByteArray(KnotClassDelegate.java:422)
+		... 18 more
+	Caused by: org.spongepowered.asm.mixin.throwables.MixinApplyError: Mixin [notextwall.mixins.json:ExampleMixin from mod notextwall] from phase [DEFAULT] in config [notextwall.mixins.json] FAILED during APPLY
+		at org.spongepowered.asm.mixin.transformer.MixinProcessor.handleMixinError(MixinProcessor.java:638)
+		at org.spongepowered.asm.mixin.transformer.MixinProcessor.handleMixinApplyError(MixinProcessor.java:589)
+		at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:379)
+		... 21 more
+	Caused by: org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException: Critical injection failure: @Inject annotation on onInjectGameMessage could not find any targets matching 'onGameMessage' in net.minecraft.server.MinecraftServer. No refMap loaded. [PREINJECT Applicator Phase -> notextwall.mixins.json:ExampleMixin from mod notextwall -> Prepare Injections ->  -> handler$zig000$notextwall$onInjectGameMessage(Lnet/minecraft/network/message/MessageType;Lnet/minecraft/text/Text;Ljava/util/UUID;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V -> Parse]
+		at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.validateTargets(InjectionInfo.java:656)
+		at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.findTargets(InjectionInfo.java:587)
+		at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.readAnnotation(InjectionInfo.java:330)
+		at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.<init>(InjectionInfo.java:316)
+		at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.<init>(InjectionInfo.java:308)
+		at org.spongepowered.asm.mixin.injection.struct.CallbackInjectionInfo.<init>(CallbackInjectionInfo.java:46)
+		at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+		at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+		at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+		at org.spongepowered.asm.mixin.injection.struct.InjectionInfo$InjectorEntry.create(InjectionInfo.java:149)
+		at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.parse(InjectionInfo.java:708)
+		at org.spongepowered.asm.mixin.transformer.MixinTargetContext.prepareInjections(MixinTargetContext.java:1329)
+		at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.prepareInjections(MixinApplicatorStandard.java:1053)
+		at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.applyMixin(MixinApplicatorStandard.java:395)
+		at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.apply(MixinApplicatorStandard.java:327)
+		at org.spongepowered.asm.mixin.transformer.TargetClassContext.apply(TargetClassContext.java:421)
+		at org.spongepowered.asm.mixin.transformer.TargetClassContext.applyMixins(TargetClassContext.java:403)
+		at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:363)
+		... 21 more
+Caused by: java.lang.BootstrapMethodError: java.lang.RuntimeException: Mixin transformation of net.minecraft.server.MinecraftServer failed
+	at net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents.lambda$static$1(ServerLifecycleEvents.java:36)
+	at net.fabricmc.fabric.impl.base.event.ArrayBackedEvent.update(ArrayBackedEvent.java:54)
+	at net.fabricmc.fabric.impl.base.event.ArrayBackedEvent.<init>(ArrayBackedEvent.java:50)
+	at net.fabricmc.fabric.impl.base.event.EventFactoryImpl.createArrayBacked(EventFactoryImpl.java:47)
+	at net.fabricmc.fabric.api.event.EventFactory.createArrayBacked(EventFactory.java:44)
+	at net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents.<clinit>(ServerLifecycleEvents.java:36)
+	at net.fabricmc.fabric.impl.lookup.ApiLookupImpl.onInitialize(ApiLookupImpl.java:26)
+	at net.fabricmc.loader.impl.FabricLoaderImpl.invokeEntrypoints(FabricLoaderImpl.java:384)
+	... 7 more
+Caused by: java.lang.RuntimeException: Mixin transformation of net.minecraft.server.MinecraftServer failed
+	at net.fabricmc.loader.impl.launch.knot.KnotClassDelegate.getPostMixinClassByteArray(KnotClassDelegate.java:427)
+	at net.fabricmc.loader.impl.launch.knot.KnotClassDelegate.tryLoadClass(KnotClassDelegate.java:323)
+	at net.fabricmc.loader.impl.launch.knot.KnotClassDelegate.loadClass(KnotClassDelegate.java:218)
+	at net.fabricmc.loader.impl.launch.knot.KnotClassLoader.loadClass(KnotClassLoader.java:119)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+	... 15 more
+Caused by: org.spongepowered.asm.mixin.transformer.throwables.MixinTransformerError: An unexpected critical error was encountered
+	at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:392)
+	at org.spongepowered.asm.mixin.transformer.MixinTransformer.transformClass(MixinTransformer.java:234)
+	at org.spongepowered.asm.mixin.transformer.MixinTransformer.transformClassBytes(MixinTransformer.java:202)
+	at net.fabricmc.loader.impl.launch.knot.KnotClassDelegate.getPostMixinClassByteArray(KnotClassDelegate.java:422)
+	... 19 more
+Caused by: org.spongepowered.asm.mixin.throwables.MixinApplyError: Mixin [notextwall.mixins.json:ExampleMixin from mod notextwall] from phase [DEFAULT] in config [notextwall.mixins.json] FAILED during APPLY
+	at org.spongepowered.asm.mixin.transformer.MixinProcessor.handleMixinError(MixinProcessor.java:638)
+	at org.spongepowered.asm.mixin.transformer.MixinProcessor.handleMixinApplyError(MixinProcessor.java:589)
+	at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:379)
+	... 22 more
+Caused by: org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException: Critical injection failure: @Inject annotation on onInjectGameMessage could not find any targets matching 'onGameMessage' in net.minecraft.server.MinecraftServer. No refMap loaded. [PREINJECT Applicator Phase -> notextwall.mixins.json:ExampleMixin from mod notextwall -> Prepare Injections ->  -> handler$zig000$notextwall$onInjectGameMessage(Lnet/minecraft/network/message/MessageType;Lnet/minecraft/text/Text;Ljava/util/UUID;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfo;)V -> Parse]
+	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.validateTargets(InjectionInfo.java:656)
+	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.findTargets(InjectionInfo.java:587)
+	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.readAnnotation(InjectionInfo.java:330)
+	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.<init>(InjectionInfo.java:316)
+	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.<init>(InjectionInfo.java:308)
+	at org.spongepowered.asm.mixin.injection.struct.CallbackInjectionInfo.<init>(CallbackInjectionInfo.java:46)
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo$InjectorEntry.create(InjectionInfo.java:149)
+	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.parse(InjectionInfo.java:708)
+	at org.spongepowered.asm.mixin.transformer.MixinTargetContext.prepareInjections(MixinTargetContext.java:1329)
+	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.prepareInjections(MixinApplicatorStandard.java:1053)
+	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.applyMixin(MixinApplicatorStandard.java:395)
+	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.apply(MixinApplicatorStandard.java:327)
+	at org.spongepowered.asm.mixin.transformer.TargetClassContext.apply(TargetClassContext.java:421)
+	at org.spongepowered.asm.mixin.transformer.TargetClassContext.applyMixins(TargetClassContext.java:403)
+	at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:363)
+	... 22 more
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Render thread
+Stacktrace:
+	at net.fabricmc.loader.impl.FabricLoaderImpl.lambda$invokeEntrypoints$2(FabricLoaderImpl.java:388)
+	at net.fabricmc.loader.impl.util.ExceptionUtil.gatherExceptions(ExceptionUtil.java:33)
+	at net.fabricmc.loader.impl.FabricLoaderImpl.invokeEntrypoints(FabricLoaderImpl.java:386)
+	at net.fabricmc.loader.impl.game.minecraft.Hooks.startClient(Hooks.java:52)
+	at net.minecraft.client.MinecraftClient.<init>(MinecraftClient.java:542)
+
+-- Initialization --
+Details:
+	Modules: 
+		ADVAPI32.dll:Advanced Windows 32 Base API:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		COMCTL32.dll:User Experience Controls Library:6.10 (WinBuild.160101.0800):Microsoft Corporation
+		CRYPT32.dll:Crypto API32:10.0.22621.2860 (WinBuild.160101.0800):Microsoft Corporation
+		CRYPTBASE.dll:Base cryptographic API DLL:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		CRYPTSP.dll:Cryptographic Service Provider API:10.0.22621.2506 (WinBuild.160101.0800):Microsoft Corporation
+		DBGHELP.DLL:Windows Image Helper:10.0.22621.2506 (WinBuild.160101.0800):Microsoft Corporation
+		DNSAPI.dll:DNS Client API DLL:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		GDI32.dll:GDI Client DLL:10.0.22621.3085 (WinBuild.160101.0800):Microsoft Corporation
+		IMM32.DLL:Multi-User Windows IMM32 API Client DLL:10.0.22621.2792 (WinBuild.160101.0800):Microsoft Corporation
+		IPHLPAPI.DLL:IP Helper API:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		KERNEL32.DLL:Windows NT BASE API Client DLL:10.0.22621.2506 (WinBuild.160101.0800):Microsoft Corporation
+		KERNELBASE.dll:Windows NT BASE API Client DLL:10.0.22621.2506 (WinBuild.160101.0800):Microsoft Corporation
+		MpOav.dll:IOfficeAntiVirus Module:4.18.24020.7 (f5b7a53876c03330b0e7c1a6020590269cbbc2b6):Microsoft Corporation
+		NSI.dll:NSI User-mode interface DLL:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		NTASN1.dll:Microsoft ASN.1 API:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		OLEAUT32.dll:OLEAUT32.DLL:10.0.22621.2506 (WinBuild.160101.0800):Microsoft Corporation
+		Ole32.dll:Microsoft OLE for Windows:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		POWRPROF.dll:Power Profile Helper DLL:10.0.22621.2860 (WinBuild.160101.0800):Microsoft Corporation
+		PSAPI.DLL:Process Status Helper:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		Pdh.dll:Windows Performance Data Helper DLL:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		RPCRT4.dll:Remote Procedure Call Runtime:10.0.22621.2506 (WinBuild.160101.0800):Microsoft Corporation
+		SHCORE.dll:SHCORE:10.0.22621.2860 (WinBuild.160101.0800):Microsoft Corporation
+		SHELL32.dll:Windows Shell Common Dll:10.0.22621.2860 (WinBuild.160101.0800):Microsoft Corporation
+		UMPDC.dll:User Mode Power Dependency Coordinator:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		USER32.dll:Multi-User Windows USER API Client DLL:10.0.22621.2860 (WinBuild.160101.0800):Microsoft Corporation
+		USERENV.dll:Userenv:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		VCRUNTIME140.dll:Microsoft® C Runtime Library:14.31.31103.0:Microsoft Corporation
+		VERSION.dll:Version Checking and File Installation Libraries:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		WINHTTP.dll:Windows HTTP Services:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		WINMM.dll:MCI API DLL:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		WS2_32.dll:Windows Socket 2.0 32-Bit DLL:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		amsi.dll:Anti-Malware Scan Interface:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		bcrypt.dll:Windows Cryptographic Primitives Library:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		bcryptPrimitives.dll:Windows Cryptographic Primitives Library:10.0.22621.2506 (WinBuild.160101.0800):Microsoft Corporation
+		clbcatq.dll:COM+ Configuration Catalog:2001.12.10941.16384 (WinBuild.160101.0800):Microsoft Corporation
+		combase.dll:Microsoft COM for Windows:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		dbgcore.DLL:Windows Core Debugging Helpers:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		extnet.dll:Java(TM) Platform SE binary:21.0.2.0:Oracle Corporation
+		fwpuclnt.dll:FWP/IPsec User-Mode API:10.0.22621.2506 (WinBuild.160101.0800):Microsoft Corporation
+		gdi32full.dll:GDI Client DLL:10.0.22621.3085 (WinBuild.160101.0800):Microsoft Corporation
+		java.dll:Java(TM) Platform SE binary:21.0.2.0:Oracle Corporation
+		java.exe:Java(TM) Platform SE binary:21.0.2.0:Oracle Corporation
+		jemalloc.dll
+		jimage.dll:Java(TM) Platform SE binary:21.0.2.0:Oracle Corporation
+		jli.dll:Java(TM) Platform SE binary:21.0.2.0:Oracle Corporation
+		jna6563378104987175413.dll:JNA native library:6.1.6:Java(TM) Native Access (JNA)
+		jsvml.dll:Java(TM) Platform SE binary:21.0.2.0:Oracle Corporation
+		jvm.dll:Java HotSpot(TM) 64-Bit server VM:21.0.2.0:Oracle Corporation
+		kernel.appcore.dll:AppModel API Host:10.0.22621.2715 (WinBuild.160101.0800):Microsoft Corporation
+		lwjgl.dll
+		management.dll:Java(TM) Platform SE binary:21.0.2.0:Oracle Corporation
+		management_ext.dll:Java(TM) Platform SE binary:21.0.2.0:Oracle Corporation
+		msvcp140.dll:Microsoft® C Runtime Library:14.31.31103.0:Microsoft Corporation
+		msvcp_win.dll:Microsoft® C Runtime Library:10.0.22621.2506 (WinBuild.160101.0800):Microsoft Corporation
+		msvcrt.dll:Windows NT CRT DLL:7.0.22621.2506 (WinBuild.160101.0800):Microsoft Corporation
+		mswsock.dll:Microsoft Windows Sockets 2.0 Service Provider:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		napinsp.dll:E-mail Naming Shim Provider:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		ncrypt.dll:Windows NCrypt Router:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		net.dll:Java(TM) Platform SE binary:21.0.2.0:Oracle Corporation
+		nio.dll:Java(TM) Platform SE binary:21.0.2.0:Oracle Corporation
+		nlansp_c.dll:NLA Namespace Service Provider DLL:10.0.22621.2506 (WinBuild.160101.0800):Microsoft Corporation
+		ntdll.dll:NT Layer DLL:10.0.22621.2506 (WinBuild.160101.0800):Microsoft Corporation
+		perfos.dll:Windows System Performance Objects DLL:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		pfclient.dll:SysMain Client:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		pnrpnsp.dll:PNRP Name Space Provider:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		profapi.dll:User Profile Basic API:10.0.22621.2506 (WinBuild.160101.0800):Microsoft Corporation
+		rasadhlp.dll:Remote Access AutoDial Helper:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		rsaenh.dll:Microsoft Enhanced Cryptographic Provider:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		sechost.dll:Host for SCM/SDDL/LSA Lookup APIs:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		shlwapi.dll:Shell Light-weight Utility Library:10.0.22621.2860 (WinBuild.160101.0800):Microsoft Corporation
+		sunmscapi.dll:Java(TM) Platform SE binary:21.0.2.0:Oracle Corporation
+		ucrtbase.dll:Microsoft® C Runtime Library:10.0.22621.2506 (WinBuild.160101.0800):Microsoft Corporation
+		vcruntime140_1.dll:Microsoft® C Runtime Library:14.31.31103.0:Microsoft Corporation
+		verify.dll:Java(TM) Platform SE binary:21.0.2.0:Oracle Corporation
+		win32u.dll:Win32u:10.0.22621.3085 (WinBuild.160101.0800):Microsoft Corporation
+		windows.storage.dll:Microsoft WinRT Storage API:10.0.22621.2860 (WinBuild.160101.0800):Microsoft Corporation
+		winrnr.dll:LDAP RnR Provider DLL:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		wintypes.dll:Windows Base Types DLL:10.0.22621.1 (WinBuild.160101.0800):Microsoft Corporation
+		wshbth.dll:Windows Sockets Helper DLL:10.0.22621.2506 (WinBuild.160101.0800):Microsoft Corporation
+		zip.dll:Java(TM) Platform SE binary:21.0.2.0:Oracle Corporation
+Stacktrace:
+	at net.minecraft.client.main.Main.main(Main.java:203)
+	at net.fabricmc.loader.impl.game.minecraft.MinecraftGameProvider.launch(MinecraftGameProvider.java:470)
+	at net.fabricmc.loader.impl.launch.knot.Knot.launch(Knot.java:74)
+	at net.fabricmc.loader.impl.launch.knot.KnotClient.main(KnotClient.java:23)
+	at net.fabricmc.devlaunchinjector.Main.main(Main.java:86)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.20.4
+	Minecraft Version ID: 1.20.4
+	Operating System: Windows 11 (amd64) version 10.0
+	Java Version: 21.0.2, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode, sharing), Oracle Corporation
+	Memory: 215882104 bytes (205 MiB) / 436207616 bytes (416 MiB) up to 17121148928 bytes (16328 MiB)
+	CPUs: 20
+	Processor Vendor: GenuineIntel
+	Processor Name: 13th Gen Intel(R) Core(TM) i5-13600K
+	Identifier: Intel64 Family 6 Model 183 Stepping 1
+	Microarchitecture: unknown
+	Frequency (GHz): 3.49
+	Number of physical packages: 1
+	Number of physical CPUs: 14
+	Number of logical CPUs: 20
+	Graphics card #0 name: Intel(R) UHD Graphics 770
+	Graphics card #0 vendor: Intel Corporation (0x8086)
+	Graphics card #0 VRAM (MB): 1024.00
+	Graphics card #0 deviceId: 0xa780
+	Graphics card #0 versionInfo: DriverVersion=31.0.101.4577
+	Graphics card #1 name: NVIDIA GeForce RTX 2060
+	Graphics card #1 vendor: NVIDIA (0x10de)
+	Graphics card #1 VRAM (MB): 4095.00
+	Graphics card #1 deviceId: 0x1f08
+	Graphics card #1 versionInfo: DriverVersion=31.0.15.3699
+	Memory slot #0 capacity (MB): 32768.00
+	Memory slot #0 clockSpeed (GHz): 4.80
+	Memory slot #0 type: Unknown
+	Memory slot #1 capacity (MB): 32768.00
+	Memory slot #1 clockSpeed (GHz): 4.80
+	Memory slot #1 type: Unknown
+	Virtual memory max (MB): 69400.72
+	Virtual memory used (MB): 21980.33
+	Swap memory total (MB): 4096.00
+	Swap memory used (MB): 0.00
+	JVM Flags: 0 total; 
+	Fabric Mods: 
+		fabric-api: Fabric API 0.96.11+1.20.4
+		fabric-api-base: Fabric API Base 0.4.36+78d798af4f
+		fabric-api-lookup-api-v1: Fabric API Lookup API (v1) 1.6.49+82b1bb3e4f
+		fabric-biome-api-v1: Fabric Biome API (v1) 13.0.16+78d798af4f
+		fabric-block-api-v1: Fabric Block API (v1) 1.0.16+3e2216cb4f
+		fabric-block-view-api-v2: Fabric BlockView API (v2) 1.0.4+78d798af4f
+		fabric-blockrenderlayer-v1: Fabric BlockRenderLayer Registration (v1) 1.1.46+78d798af4f
+		fabric-client-tags-api-v1: Fabric Client Tags 1.1.7+78d798af4f
+		fabric-command-api-v1: Fabric Command API (v1) 1.2.41+f71b366f4f
+		fabric-command-api-v2: Fabric Command API (v2) 2.2.20+78d798af4f
+		fabric-commands-v0: Fabric Commands (v0) 0.2.58+df3654b34f
+		fabric-containers-v0: Fabric Containers (v0) 0.1.86+df3654b34f
+		fabric-content-registries-v0: Fabric Content Registries (v0) 5.0.15+78d798af4f
+		fabric-convention-tags-v1: Fabric Convention Tags 1.5.10+78d798af4f
+		fabric-crash-report-info-v1: Fabric Crash Report Info (v1) 0.2.23+78d798af4f
+		fabric-data-attachment-api-v1: Fabric Data Attachment API (v1) 1.1.4+b90db5744f
+		fabric-data-generation-api-v1: Fabric Data Generation API (v1) 13.2.4+5c0133444f
+		fabric-dimensions-v1: Fabric Dimensions API (v1) 2.1.61+78d798af4f
+		fabric-entity-events-v1: Fabric Entity Events (v1) 1.6.1+09fc25014f
+		fabric-events-interaction-v0: Fabric Events Interaction (v0) 0.7.1+389931eb4f
+		fabric-events-lifecycle-v0: Fabric Events Lifecycle (v0) 0.2.74+df3654b34f
+		fabric-game-rule-api-v1: Fabric Game Rule API (v1) 1.0.46+78d798af4f
+		fabric-gametest-api-v1: Fabric Game Test API (v1) 1.3.5+85d85a934f
+		fabric-item-api-v1: Fabric Item API (v1) 2.2.0+d6f2b0844f
+		fabric-item-group-api-v1: Fabric Item Group API (v1) 4.0.26+58f8c0124f
+		fabric-key-binding-api-v1: Fabric Key Binding API (v1) 1.0.41+78d798af4f
+		fabric-keybindings-v0: Fabric Key Bindings (v0) 0.2.39+df3654b34f
+		fabric-lifecycle-events-v1: Fabric Lifecycle Events (v1) 2.3.0+a67ffb5d4f
+		fabric-loot-api-v2: Fabric Loot API (v2) 2.1.9+78d798af4f
+		fabric-message-api-v1: Fabric Message API (v1) 6.0.5+78d798af4f
+		fabric-mining-level-api-v1: Fabric Mining Level API (v1) 2.1.65+78d798af4f
+		fabric-model-loading-api-v1: Fabric Model Loading API (v1) 1.0.8+78d798af4f
+		fabric-models-v0: Fabric Models (v0) 0.4.7+9386d8a74f
+		fabric-networking-api-v1: Fabric Networking API (v1) 3.1.7+2e5ac5484f
+		fabric-object-builder-api-v1: Fabric Object Builder API (v1) 13.0.14+080016e44f
+		fabric-particles-v1: Fabric Particles (v1) 1.1.7+78d798af4f
+		fabric-recipe-api-v1: Fabric Recipe API (v1) 2.0.20+78d798af4f
+		fabric-registry-sync-v0: Fabric Registry Sync (v0) 4.0.19+58f8c0124f
+		fabric-renderer-api-v1: Fabric Renderer API (v1) 3.2.4+78d798af4f
+		fabric-renderer-indigo: Fabric Renderer - Indigo 1.5.4+78d798af4f
+		fabric-renderer-registries-v1: Fabric Renderer Registries (v1) 3.2.53+df3654b34f
+		fabric-rendering-data-attachment-v1: Fabric Rendering Data Attachment (v1) 0.3.42+73761d2e4f
+		fabric-rendering-fluids-v1: Fabric Rendering Fluids (v1) 3.1.1+e761c6694f
+		fabric-rendering-v0: Fabric Rendering (v0) 1.1.56+df3654b34f
+		fabric-rendering-v1: Fabric Rendering (v1) 3.2.0+6fd945a04f
+		fabric-resource-conditions-api-v1: Fabric Resource Conditions API (v1) 2.3.14+78d798af4f
+		fabric-resource-loader-v0: Fabric Resource Loader (v0) 0.11.20+df798a894f
+		fabric-screen-api-v1: Fabric Screen API (v1) 2.0.17+78d798af4f
+		fabric-screen-handler-api-v1: Fabric Screen Handler API (v1) 1.3.55+78d798af4f
+		fabric-sound-api-v1: Fabric Sound API (v1) 1.0.17+78d798af4f
+		fabric-transfer-api-v1: Fabric Transfer API (v1) 4.0.11+eb30349a4f
+		fabric-transitive-access-wideners-v1: Fabric Transitive Access Wideners (v1) 5.0.14+78d798af4f
+		fabricloader: Fabric Loader 0.15.7
+		java: Java HotSpot(TM) 64-Bit Server VM 21
+		minecraft: Minecraft 1.20.4
+		mixinextras: MixinExtras 0.3.5
+		notextwall: NoTextWall 0.1-1.20.4
+	Launched Version: Fabric
+	Backend library: LWJGL version 3.3.2-snapshot
+	Backend API: Unknown
+	Window size: <not initialized>
+	GL Caps: Using framebuffer using OpenGL 3.2
+	GL debug messages: <disabled>
+	Using VBOs: Yes
+	Is Modded: Definitely; Client brand changed to 'fabric'
+	Universe: 404
+	Type: Client (map_client.txt)
+	Locale: en_GB
+	CPU: <unknown>

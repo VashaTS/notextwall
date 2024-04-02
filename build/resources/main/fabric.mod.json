@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "notextwall",
+	"version": "0.1f-1.20.4",
+	"name": "NoTextWall",
+	"description": "This mod prevents displaying long chat messages",
+	"authors": [
+		"Vasha"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "MIT",
+	"icon": "assets/notextwall/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.vsh33.notextwall.NoTextWall"
+		],
+		"client": [
+			"net.vsh33.notextwall.NoTextWallClient"
+		],
+		"fabric-datagen": [
+			"net.vsh33.notextwall.NoTextWallDataGenerator"
+		]
+	},
+	"mixins": [
+		"notextwall.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.6",
+		"minecraft": "~1.20.4",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
