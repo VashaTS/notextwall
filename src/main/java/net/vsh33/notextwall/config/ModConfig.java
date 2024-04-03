@@ -15,15 +15,20 @@ public class ModConfig {
 
     @Expose
     private int maxMessageLength = 100; // Default value
+    @Expose
+    private boolean showCancelMessage = true;
 
     // Getter and Setter
     public int getMaxMessageLength() {
         return maxMessageLength;
     }
+    public boolean getShowCancelMessage() { return showCancelMessage; }
+
 
     public void setMaxMessageLength(int maxMessageLength) {
         this.maxMessageLength = maxMessageLength;
     }
+    public void setShowCancelMessage(boolean showCancelMessage) { this.showCancelMessage = showCancelMessage; }
 
     // Load the configuration from file
     public static ModConfig load() {

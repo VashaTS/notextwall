@@ -27,7 +27,9 @@ public class ExampleMixin {
 
 		if (messageContent != null && messageContent.length() > CONFIG.getMaxMessageLength()) {
 			ci.cancel(); // Cancel the message if it's too long
-			debugMessage("Long message canceled");
+			if (CONFIG.getShowCancelMessage()) {
+				debugMessage("Long message canceled");
+			}
 		}
 	}
 	//for server
@@ -38,7 +40,9 @@ public class ExampleMixin {
 		// Cancel the chat message if it exceeds 100 characters
 		if (message.length() > CONFIG.getMaxMessageLength()) {
 			ci.cancel();
-			debugMessage("Long message canceled");
+			if (CONFIG.getShowCancelMessage()) {
+				debugMessage("Long message canceled");
+			}
 		}
 	}
 	// Utility method to display a debug message only to the player
